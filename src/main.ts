@@ -52,12 +52,24 @@ export default class GoogleDocsPastePlugin extends Plugin {
     const types = evt.clipboardData ? Array.from(evt.clipboardData.types) : [];
     const detected = html ? isGoogleDocsHtml(html) : false;
     const preview = html.slice(0, 200).replace(/\s+/g, " ");
+
+    let dumpInfo = "";
+    if (html) {
+      const filename = `_gdocs-paste-debug-${Date.now()}.html`;
+      void this.app.vault.create(filename, html).then(
+        () => new Notice(`[gdocs-paste] full HTML saved to ${filename}`, 10000),
+        (err) => new Notice(`[gdocs-paste] failed to save debug file: ${err}`, 10000),
+      );
+      dumpInfo = `\nfull HTML being saved to vault as _gdocs-paste-debug-*.html`;
+    }
+
     const msg =
       `[gdocs-paste diagnostics]\n` +
       `types: ${types.length ? types.join(", ") : "(none)"}\n` +
       `text/html length: ${html.length}\n` +
       `gdocs-detected: ${detected}\n` +
-      `html[0..200]: ${preview || "(empty)"}`;
+      `html[0..200]: ${preview || "(empty)"}` +
+      dumpInfo;
     new Notice(msg, 30000);
   }
 
