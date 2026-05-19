@@ -40,8 +40,8 @@ manually as an unpacked plugin.
 1. **Build the plugin**
 
    ```
-   git clone https://github.com/bfgpollara/claude-code-experiments
-   cd claude-code-experiments/obsidian-google-docs-paste
+   git clone https://github.com/bfgpollara/obsidian-google-docs-paste
+   cd obsidian-google-docs-paste
    npm install
    npm run build
    ```

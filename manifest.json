@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "minAppVersion": "1.4.0",
   "description": "Pastes content from Google Docs into Obsidian with bold, italic, headings, lists, links, tables and images preserved instead of collapsed to plain text.",
-  "author": "claude-code-experiments",
+  "author": "bfgpollara",
+  "authorUrl": "https://github.com/bfgpollara",
   "isDesktopOnly": false
 }
