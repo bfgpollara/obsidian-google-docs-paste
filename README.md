@@ -1,8 +1,8 @@
 # Google Docs Paste — Obsidian Plugin
 
-Paste content from Google Docs into Obsidian with formatting preserved instead of collapsed to plain text wrapped in `**`.
+Paste content from Google Docs with formatting preserved instead of collapsed to plain text wrapped in `**`.
 
-Built in response to the long-running Obsidian forum thread
+Built with the assistance of the forum thread
 [*Copy-pasting from Google Docs loses formatting and wraps text in*](https://forum.obsidian.md/t/copy-pasting-from-google-docs-looses-formatting-and-wraps-text-in/105199/7).
 
 ## Why
@@ -37,7 +37,7 @@ Non-Google-Docs pastes are untouched.
 
 ## Install locally
 
-This plugin is not (yet) in the Obsidian community catalog, so install it
+This plugin is not (yet) in the community catalog, so install it
 manually as an unpacked plugin.
 
 1. **Build the plugin**
