@@ -1,4 +1,6 @@
 import type { GDocsPasteSettings, RegexRule } from "../settings";
+import { isAppleRichTextHtml } from "../detect";
+import { normalizeAppleRichText } from "./apple";
 import { normalizeBlocks } from "./blocks";
 import { normalizeInline } from "./inline";
 import { normalizeLinks } from "./links";
@@ -26,23 +28,25 @@ function serialize(doc: Document): string {
   return doc.body.innerHTML;
 }
 
-export function normalizeGoogleDocsHtml(html: string, settings: GDocsPasteSettings): string {
-  const preProcessed = applyRegexRules(html, settings.userHtmlRegex);
-  const doc = parse(preProcessed);
+function runPipeline(doc: Document, html: string, settings: GDocsPasteSettings): void {
+  if (isAppleRichTextHtml(html)) normalizeAppleRichText(doc);
   normalizeBlocks(doc, settings);
   normalizeInline(doc, settings);
   normalizeLinks(doc, settings);
   normalizeTables(doc);
+}
+
+export function normalizeGoogleDocsHtml(html: string, settings: GDocsPasteSettings): string {
+  const preProcessed = applyRegexRules(html, settings.userHtmlRegex);
+  const doc = parse(preProcessed);
+  runPipeline(doc, preProcessed, settings);
   return serialize(doc);
 }
 
 export function normalizeGoogleDocsDocument(html: string, settings: GDocsPasteSettings): Document {
   const preProcessed = applyRegexRules(html, settings.userHtmlRegex);
   const doc = parse(preProcessed);
-  normalizeBlocks(doc, settings);
-  normalizeInline(doc, settings);
-  normalizeLinks(doc, settings);
-  normalizeTables(doc);
+  runPipeline(doc, preProcessed, settings);
   return doc;
 }
 

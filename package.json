@@ -1,6 +1,6 @@
 {
   "name": "obsidian-google-docs-paste",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Paste from Google Docs into Obsidian with formatting preserved.",
   "main": "main.js",
   "scripts": {

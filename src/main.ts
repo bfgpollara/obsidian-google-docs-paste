@@ -7,7 +7,7 @@ import {
   Plugin,
   TFile,
 } from "obsidian";
-import { isGoogleDocsHtml } from "./detect";
+import { isAppleRichTextHtml, isGoogleDocsHtml, isSupportedPasteHtml } from "./detect";
 import { normalizeGoogleDocsDocument, postProcessMarkdown } from "./normalize";
 import { saveImagesToVaultPass } from "./normalize/images";
 import { DEFAULT_SETTINGS, GDocsPasteSettings } from "./settings";
@@ -42,7 +42,7 @@ export default class GoogleDocsPastePlugin extends Plugin {
       this.showPasteDiagnostics(evt, html);
     }
 
-    if (!html || !isGoogleDocsHtml(html)) return;
+    if (!html || !isSupportedPasteHtml(html)) return;
 
     evt.preventDefault();
     void this.handle(html, editor, info);
@@ -50,7 +50,8 @@ export default class GoogleDocsPastePlugin extends Plugin {
 
   private showPasteDiagnostics(evt: ClipboardEvent, html: string): void {
     const types = evt.clipboardData ? Array.from(evt.clipboardData.types) : [];
-    const detected = html ? isGoogleDocsHtml(html) : false;
+    const gdocs = html ? isGoogleDocsHtml(html) : false;
+    const apple = html ? isAppleRichTextHtml(html) : false;
     const preview = html.slice(0, 200).replace(/\s+/g, " ");
 
     let dumpInfo = "";
@@ -67,7 +68,8 @@ export default class GoogleDocsPastePlugin extends Plugin {
       `[gdocs-paste diagnostics]\n` +
       `types: ${types.length ? types.join(", ") : "(none)"}\n` +
       `text/html length: ${html.length}\n` +
-      `gdocs-detected: ${detected}\n` +
+      `gdocs-detected: ${gdocs}\n` +
+      `apple-detected: ${apple}\n` +
       `html[0..200]: ${preview || "(empty)"}` +
       dumpInfo;
     new Notice(msg, 30000);

@@ -92,6 +92,36 @@ describe("normalizeGoogleDocsHtml — tables", () => {
   });
 });
 
+describe("normalizeGoogleDocsHtml — Apple iOS HTML", () => {
+  const out = () => normalizeGoogleDocsHtml(fixture("apple-ios.html"), DEFAULT_SETTINGS);
+
+  it("wraps Apple bold spans in <strong>", () => {
+    expect(out()).toMatch(/<strong>[^<]*TEXT MESSAGE TEMPLATE[^<]*<\/strong>/);
+  });
+
+  it("wraps Apple italic spans in <em>", () => {
+    expect(out()).toMatch(/<em>[^<]*Thank you for helping/);
+  });
+
+  it("preserves bullet and ordered list structure", () => {
+    expect(out()).toMatch(/<ul>[\s\S]*<\/ul>/);
+    expect(out()).toMatch(/<ol>[\s\S]*<\/ol>/);
+  });
+
+  it("preserves links unchanged", () => {
+    expect(out()).toMatch(/href="https:\/\/secure\.actblue\.com\/donate\/miami4choice"/);
+  });
+
+  it("strips the Apple-interchange-newline trailing marker", () => {
+    expect(out()).not.toMatch(/Apple-interchange-newline/);
+  });
+
+  it("strips inline -webkit-text-stroke / font-kerning cruft", () => {
+    expect(out()).not.toMatch(/-webkit-text-stroke/);
+    expect(out()).not.toMatch(/font-kerning/);
+  });
+});
+
 describe("normalizeGoogleDocsHtml — color preservation off by default", () => {
   it("drops color spans when preserveColors is false", () => {
     const settings = { ...DEFAULT_SETTINGS, preserveColors: false };
