@@ -96,6 +96,30 @@ manually as an unpacked plugin.
    survive. Pastes from any non-Docs source go through Obsidian's
    built-in paste handler untouched.
 
+## Tested platforms
+
+This plugin has been tested on **macOS 26** and **iOS 26**. Other platforms
+should work but have not been verified directly.
+
+## Debugging
+
+If a paste from Google Docs is not converted as expected, enable the
+debug option to gather information for a bug report:
+
+1. Open **Settings → Community plugins → Google Docs Paste**.
+2. Under *Diagnostics*, toggle **Show clipboard info on paste** on.
+3. Reproduce the paste. A Notice will list the clipboard MIME types,
+   the detected source, and a preview of the HTML payload. The full
+   HTML is also written to your vault root as
+   `_gdocs-paste-debug-<timestamp>.html`.
+4. Please [open an issue on the GitHub
+   page](https://github.com/bfgpollara/obsidian-google-docs-paste/issues)
+   and attach the Notice text and the saved debug HTML file so the
+   problem can be reproduced.
+
+Remember to turn the toggle off again once you're done — every paste
+produces a Notice and a file while it's on.
+
 ## Develop
 
 ```
