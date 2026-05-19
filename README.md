@@ -2,6 +2,9 @@
 
 Paste content from Google Docs into Obsidian with formatting preserved instead of collapsed to plain text wrapped in `**`.
 
+Built in response to the long-running Obsidian forum thread
+[*Copy-pasting from Google Docs loses formatting and wraps text in*](https://forum.obsidian.md/t/copy-pasting-from-google-docs-looses-formatting-and-wraps-text-in/105199/7).
+
 ## Why
 
 When you copy from Google Docs, the clipboard HTML is wrapped in
