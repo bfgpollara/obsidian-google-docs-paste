@@ -3,6 +3,7 @@ import {
   htmlToMarkdown,
   MarkdownFileInfo,
   MarkdownView,
+  Notice,
   Plugin,
   TFile,
 } from "obsidian";
@@ -36,10 +37,28 @@ export default class GoogleDocsPastePlugin extends Plugin {
   ): void {
     if (evt.defaultPrevented) return;
     const html = evt.clipboardData?.getData("text/html") ?? "";
+
+    if (this.settings.diagnosticPasteLogging) {
+      this.showPasteDiagnostics(evt, html);
+    }
+
     if (!html || !isGoogleDocsHtml(html)) return;
 
     evt.preventDefault();
     void this.handle(html, editor, info);
+  }
+
+  private showPasteDiagnostics(evt: ClipboardEvent, html: string): void {
+    const types = evt.clipboardData ? Array.from(evt.clipboardData.types) : [];
+    const detected = html ? isGoogleDocsHtml(html) : false;
+    const preview = html.slice(0, 200).replace(/\s+/g, " ");
+    const msg =
+      `[gdocs-paste diagnostics]\n` +
+      `types: ${types.length ? types.join(", ") : "(none)"}\n` +
+      `text/html length: ${html.length}\n` +
+      `gdocs-detected: ${detected}\n` +
+      `html[0..200]: ${preview || "(empty)"}`;
+    new Notice(msg, 30000);
   }
 
   private async handle(

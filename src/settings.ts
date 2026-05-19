@@ -14,6 +14,7 @@ export interface GDocsPasteSettings {
   unwrapGoogleRedirects: boolean;
   userHtmlRegex: RegexRule[];
   userMarkdownRegex: RegexRule[];
+  diagnosticPasteLogging: boolean;
 }
 
 export const DEFAULT_SETTINGS: GDocsPasteSettings = {
@@ -33,4 +34,5 @@ export const DEFAULT_SETTINGS: GDocsPasteSettings = {
   unwrapGoogleRedirects: true,
   userHtmlRegex: [],
   userMarkdownRegex: [],
+  diagnosticPasteLogging: false,
 };

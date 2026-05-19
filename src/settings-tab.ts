@@ -72,5 +72,19 @@ export class GDocsPasteSettingTab extends PluginSettingTab {
           await this.plugin.saveSettings();
         }),
       );
+
+    new Setting(containerEl).setName("Diagnostics").setHeading();
+
+    new Setting(containerEl)
+      .setName("Show clipboard info on paste")
+      .setDesc(
+        "Troubleshooting only. On every paste, show a Notice listing the clipboard MIME types and a preview of any HTML payload. Use this on mobile to confirm whether Google Docs is actually putting HTML on the clipboard.",
+      )
+      .addToggle((t) =>
+        t.setValue(this.plugin.settings.diagnosticPasteLogging).onChange(async (v) => {
+          this.plugin.settings.diagnosticPasteLogging = v;
+          await this.plugin.saveSettings();
+        }),
+      );
   }
 }
