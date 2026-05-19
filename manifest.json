@@ -1,9 +1,9 @@
 {
   "id": "google-docs-paste",
   "name": "Google Docs Paste",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "minAppVersion": "1.4.0",
-  "description": "Pastes content from Google Docs with bold, italic, headings, lists, links, tables and images preserved instead of collapsed to plain text.",
+  "description": "Paste from Google Docs with formatting (bold, italic, headings, lists, links, tables, images) preserved instead of collapsed to plain text.",
   "author": "bfgpollara",
   "authorUrl": "https://github.com/bfgpollara",
   "isDesktopOnly": false
