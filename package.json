@@ -1,0 +1,26 @@
+{
+  "name": "obsidian-google-docs-paste",
+  "version": "0.1.0",
+  "description": "Paste from Google Docs into Obsidian with formatting preserved.",
+  "main": "main.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": ["obsidian", "plugin", "paste", "google-docs"],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "builtin-modules": "^3.3.0",
+    "esbuild": "^0.20.0",
+    "happy-dom": "^14.0.0",
+    "obsidian": "^1.5.0",
+    "tslib": "^2.6.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.4.0"
+  }
+}

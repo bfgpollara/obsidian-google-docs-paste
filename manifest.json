@@ -1,0 +1,9 @@
+{
+  "id": "google-docs-paste",
+  "name": "Google Docs Paste",
+  "version": "0.1.0",
+  "minAppVersion": "1.4.0",
+  "description": "Pastes content from Google Docs into Obsidian with bold, italic, headings, lists, links, tables and images preserved instead of collapsed to plain text.",
+  "author": "claude-code-experiments",
+  "isDesktopOnly": false
+}
